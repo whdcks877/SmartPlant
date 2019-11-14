@@ -5,7 +5,7 @@
 #define PUMP D7 //펌프모터
 //Wifi 설정
 const char *ssid = "SIOR";
-const char *password = "abcd1234";
+const char *password = "password";
 
 //mqtt 서버 정보
 const char* mqtt_server = "tailor.cloudmqtt.com";
@@ -118,7 +118,7 @@ void reconnect() {
     while (!client.connected()) {
         Serial.print("Attempting MQTT connection...");
         // Attempt to connect
-        if (client.connect("ESP8266Client","wvewfgbg","0BwuLSnOSda4")) {
+        if (client.connect("ESP8266Client","username","passsword")) {
             Serial.println("connected");
             // Once connected, publish an announcement...
             client.publish(mqtt_topic, "hello world");
