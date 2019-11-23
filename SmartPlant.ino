@@ -2,10 +2,10 @@
 #include <PubSubClient.h>
 
 #define A0Pin A0 //습도센서
-#define PUMP D7 //펌프모터
+#define PUMP D11 //펌프모터
 //Wifi 설정
 const char *ssid = "SIOR";
-const char *password = "password";
+const char *password = "abcd1234";
 
 //mqtt 서버 정보
 const char* mqtt_server = "tailor.cloudmqtt.com";
@@ -70,14 +70,14 @@ void loop() {
     val_s.toCharArray(val_c,val_s.length()+1);
     client.publish("Arduino/sensorVal",val_c);
   
-   if((sensorVal >900) || (WateringCommend==1)) {
+   if((sensorVal >700) || (WateringCommend==1)) {
       Serial.println("Very Dry!");
       digitalWrite(PUMP,HIGH);
       Serial.println("Pump On for 1 Second!");
-      delay(2000);
+      delay(1000);
       digitalWrite(PUMP,LOW);
       WateringCommend = 0;
-    } else if(sensorVal <= 900) {
+    } else if(sensorVal <= 700) {
       Serial.println("Very Wet!");
     }
     
@@ -118,7 +118,7 @@ void reconnect() {
     while (!client.connected()) {
         Serial.print("Attempting MQTT connection...");
         // Attempt to connect
-        if (client.connect("ESP8266Client","username","passsword")) {
+        if (client.connect("ESP8266Client","wvewfgbg","0BwuLSnOSda4")) {
             Serial.println("connected");
             // Once connected, publish an announcement...
             client.publish(mqtt_topic, "hello world");
